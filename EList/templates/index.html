@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Cloud Diary</title>
+
+
+	</head>
+<body style="background-color: #62BCE0 ">
+
+	<h1 style="color: #495556;text-shadow:-5px -1px 6px;font-size: 100px">Cloud Diary</h1>
+
+	
+	<h4>Date</h4>	
+	<input type="text" id="currentDate" placeholder="Date today">	
+	<h3 style="margin: 4px;">Diary</h3>
+		
+<div>
+<textarea id="saveinput" name="subject" placeholder="What happened today.." style=" background-color: white;border: transparent;border: 3px ridge rgba(28,110,164,0.8);border-radius: 0px 17px 0px 17px; word-wrap: break-word; height: 250px; width: 100%; padding: 5px;"></textarea>
+</div>
+<input type="submit" onclick="savediary()" value="Save"></input>
+
+
+<script>
+		var today = new Date();
+		var date = today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear();
+		var correct = today.date;
+
+  			document.getElementById("currentDate").value = date;
+</script>
+</body>
+</html>
