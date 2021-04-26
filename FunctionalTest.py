@@ -21,31 +21,45 @@ class PageTest(unittest.TestCase):
 	def test_start_list_retrieve_it(self):
 		self.browser.get('http://localhost:8000')
 		self.assertIn('Cloud Diary', self.browser.title)
+
 		headerText = self.browser.find_element_by_tag_name('h1').text
 		self.assertIn('Cloud Diary', headerText)
+
 		headerText = self.browser.find_element_by_tag_name('h4').text
 		self.assertIn('Date', headerText)
-		textarea = self.browser.find_element_by_tag_name('textarea').text
-		#inputbox = self.browser.find_element_by_id('today')
-		#self.assertEqual(inputbox.get_attribute('placeholder'), 'Write your experiences today')
-		#inputbox.send_keys('Today I did something awesome.')
-		#inputbox.send_keys(Keys.ENTER)
-		#time.sleep(2)
-		saveinput = self.browser.find_element_by_id('saveinput')
-		#inputbox.send_keys('Today I did something awesome.')
-		#inputbox.send_keys(Keys.ENTER)
-		self.assertEqual(saveinput.get_attribute('placeholder'), 'What happened today..')
-		#dateinput = self.browser.find_element_by_id('dateinput')
-		#self.assertEqual(dateinput.get_attribute('placeholder'), 'Date Today')
-		#headerText = self.browser.find_element_by_tag_name('h5').text
-		#self.assertIn('Date', headerText)
+
 		headerText = self.browser.find_element_by_tag_name('h3').text
 		self.assertIn('Diary', headerText)
 
-		#table = self.browser.find_element_by_id('idListTable')
-		#rows = table.find_element_by_tag_name('tr')
-		#self.assertTrue(any(row.text == '1: Eljohn Torres'))
+		inputbox = self.browser.find_element_by_id('saveinput')
+		self.assertEqual(inputbox.get_attribute('placeholder'), 'What happened today..')
+		inputbox.send_keys('Diary Entry')
+		inputbox.send_keys(Keys.ENTER)
+
+		#self.fail('Finish the Test!')
+
+		#script = self.browser.find_element_by_id('scriptdate')
+		#self.assertEqual(script.get_attribute('placeholder'), 'DateToday')
+		time.sleep(5)
+		table = self.browser.find_element_by_id('diarylist')
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn('1: Diary Entry', [row.text for row in rows]),
+		"New to-do item did not appear in table -- its text was:\n%s" % (table.text,)
 		#self.fail('Finish the test')
+
+#class DiaryPageTest(unittest.TestCase):
+
+	#def setUp(self):
+	#	self.browser = webdriver.Firefox()
+	#	self.browser.implicitly_wait(3)
+
+	#def tearDown(self):
+	#	self.browser.quit()
+
+				
+	#def test_diary_list_retrieve_it(self):
+	#	self.browser.get('http://localhost:8800')
+	#	self.assertIn('Diary List', self.browser.title)
 
 if __name__== '__main__':
 	unittest.main(warnings = 'ignore')

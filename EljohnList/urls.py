@@ -21,4 +21,5 @@ from EList import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', views.StartPage, name = 'startpage'),
+    url(r'^$', views.ListPage, name = 'listpage'),
 ]
