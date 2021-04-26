@@ -9,8 +9,8 @@ class PageTest(unittest.TestCase):
 	def setUp(self):
 		self.browser = webdriver.Firefox()
 
-	def tearDown(self):
-		self.browser.quit()
+	#def tearDown(self):
+	#	self.browser.quit()
 
 	#def test_browser_title(self):
 		#self.browser.get('http://localhost:8000')
@@ -24,6 +24,7 @@ class PageTest(unittest.TestCase):
 		self.assertIn('Cloud Diary', headerText)
 		headerText = self.browser.find_element_by_tag_name('h4').text
 		self.assertIn('Date', headerText)
+		textarea = self.browser.find_element_by_tag_name('textarea').text
 		#inputbox = self.browser.find_element_by_id('today')
 		#self.assertEqual(inputbox.get_attribute('placeholder'), 'Write your experiences today')
 		#inputbox.send_keys('Today I did something awesome.')
