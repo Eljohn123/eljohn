@@ -35,17 +35,25 @@ class PageTest(unittest.TestCase):
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'What happened today..')
 		inputbox.send_keys('Diary Entry')
 		inputbox.send_keys(Keys.ENTER)
+		time.sleep(2)
+
+		inputbox = self.browser.find_element_by_id('saveinput')
+		inputbox.send_keys('DateToday')
+		inputbox.send_keys(Keys.ENTER)
+		time.sleep(2)
 
 		#self.fail('Finish the Test!')
 
 		#script = self.browser.find_element_by_id('scriptdate')
 		#self.assertEqual(script.get_attribute('placeholder'), 'DateToday')
-		time.sleep(5)
+		
 		table = self.browser.find_element_by_id('diarylist')
 		rows = table.find_elements_by_tag_name('tr')
 		self.assertIn('1: Diary Entry', [row.text for row in rows]),
 		"New to-do item did not appear in table -- its text was:\n%s" % (table.text,)
+		self.assertIn('2: DateToday' ,[row.text for row in rows])
 		#self.fail('Finish the test')
+
 
 #class DiaryPageTest(unittest.TestCase):
 
