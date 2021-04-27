@@ -22,6 +22,16 @@ class PageTest(unittest.TestCase):
 		rows = table.find_elements_by_tag_name('tr')
 		self.assertIn(row_text, [row.text for now in rows])
 
+		inputbox.send_keys(Keys.ENTER)
+		self.check_for_row_in_list_table('1: Diary Entry')
+
+		inputbox = self.browser.find_element_by_id('saveinput')
+		inputbox.send_keys('DateToday')
+		inputbox.send_keys(Keys.ENTER)
+
+		self.check_for_row_in_list_table('1: Diary Entry')
+		self.check_for_row_in_list_table('2: DateToday')
+
 	def test_start_list_retrieve_it(self):
 		self.browser.get('http://localhost:8000')
 		self.assertIn('Cloud Diary', self.browser.title)
@@ -35,17 +45,16 @@ class PageTest(unittest.TestCase):
 		headerText = self.browser.find_element_by_tag_name('h3').text
 		self.assertIn('Diary', headerText)
 
-	def test_user_input(self):
 		inputbox = self.browser.find_element_by_id('saveinput')
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'What happened today..')
 		inputbox.send_keys('Diary Entry')
 		inputbox.send_keys(Keys.ENTER)
-		time.sleep(2)
+		time.sleep(3)
 
 		inputbox = self.browser.find_element_by_id('saveinput')
 		inputbox.send_keys('DateToday')
 		inputbox.send_keys(Keys.ENTER)
-		time.sleep(2)
+		time.sleep(3)
 
 		#self.fail('Finish the Test!')
 
