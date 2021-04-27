@@ -17,6 +17,10 @@ class PageTest(unittest.TestCase):
 		#self.browser.get('http://localhost:8000')
 		#self.assertIn('Eljohn List', self.browser.title)
 		#self.fail('Finish the test Now!!!????')
+	def check_for_row_in_list_table(self,row_text):
+		table = self.browser.find_element_by_id('diarylist')
+		rows = table.find_elements_by_tag_name('tr')
+		self.assertIn(row_text, [row.text for now in rows])
 
 	def test_start_list_retrieve_it(self):
 		self.browser.get('http://localhost:8000')
@@ -31,6 +35,7 @@ class PageTest(unittest.TestCase):
 		headerText = self.browser.find_element_by_tag_name('h3').text
 		self.assertIn('Diary', headerText)
 
+	def test_user_input(self):
 		inputbox = self.browser.find_element_by_id('saveinput')
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'What happened today..')
 		inputbox.send_keys('Diary Entry')
