@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url 
+from django.conf.urls import include, url 
 from EList import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', views.StartPage, name = 'startpage'),
-    url(r'^$', views.ListPage, name = 'listpage'),
+    #url(r'^$', views.ListPage, name = 'listpage'),
+    url(r'^EList/the-only-list-in-the-world/$', views.view_list, name='view_list'),
 ]

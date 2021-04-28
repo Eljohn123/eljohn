@@ -1,8 +1,41 @@
+<!DOCTYPE html>
 <html>
-<head>
-	<title>Diary List</title>
-</head>
-<body>
+	<head>
+		<title>Cloud Diary</title>
 
+
+	</head>
+<body style="background-color: #62BCE0 ">
+
+	<h1 style="color: #495556;text-shadow:-5px -1px 6px;font-size: 100px">Cloud Diary</h1>
+
+	
+	<h4>Date</h4>	
+	<h3 style="margin: 4px;">Diary</h3>
+
+	
+	<input type="text" id="currentDate" placeholder="Date today">	
+	
+	<form method="POST" action="/">
+		<input id="saveinput" name="item_text" placeholder="What happened today.." />
+		{% csrf_token %}
+	</form>
+
+	<table id="diarylist">
+		{% for item in items %}
+		<tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+		{% endfor %}
+		
+	</table>
+	
+	<!--<input type="submit" onclick="savediary()" value="Save"></input>-->
+
+<script id="scriptdate" placeholder='DateToday'>
+		var today = new Date();
+		var date = today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear();
+		var correct = today.date;
+
+  			document.getElementById("currentDate").value = date;
+</script>
 </body>
 </html>
