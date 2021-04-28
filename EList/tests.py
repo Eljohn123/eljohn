@@ -27,35 +27,11 @@ class HomePageTest(TestCase):
 		expected_html = render_to_string('index.html')
 		return HttpResponse(expected_html)
 		self.assertEqual(response.content.decode(), expected_html)
-		
 
-	def test_start_page_can_save_a_POST_request(self):
-
-		request = HttpRequest()
-		request.method = 'POST'
-		request.POST['item_text'] = 'A new Diary Entry'
-
-		response = StartPage(request)
-
-		self.assertEqual(Item.objects.count(), 1)
-		new_item = Item.objects.first()
-		self.assertEqual(new_item.text, 'A new Diary Entry')
-
-	def test_start_page_redirects_after_POST(self):
-
-		request = HttpRequest()
-		request.method = 'POST'
-		request.POST['item_text'] = 'A new Diary Entry'
-
-		response = StartPage(request)
-
-		self.assertEqual(response.status_code, 302)
-		self.assertEqual(response['location'], '/EList/the-only-list-in-the-world/')
-
-	def test_start_page_only_saves_items_when_necessary(self):
-		request = HttpRequest()
-		StartPage(request)
-		self. assertEqual(Item.objects.count(), 0)
+	#def test_start_page_only_saves_items_when_necessary(self):
+		#request = HttpRequest()
+		#StartPage(request)
+		#self. assertEqual(Item.objects.count(), 0)
 
 	#def  test_start_page_displays_all_list_items(self):
 
@@ -76,6 +52,38 @@ class HomePageTest(TestCase):
 			{'new_item_text':  'A new Diary Entry'}
 			)
 		self.assertEqual(response.content.decode(), expected_html)
+
+class NewListTest(TestCase):
+
+	def test_saving_POST_request(self):
+
+		self.client.post(
+			'/EList/new',
+			data={'item_text': 'A new Diary Entry'})
+		#request = HttpRequest()
+		#request.method = 'POST'
+		#request.POST['item_text'] = 'A new Diary Entry'
+
+		#response = StartPage(request)
+
+		self.assertEqual(Item.objects.count(), 1)
+		new_item = Item.objects.first()
+		self.assertEqual(new_item.text, 'A new Diary Entry')
+
+	def test_redirects_after_POST(self):
+
+		response = self.client.post(
+			'/EList/new',
+			data={'item_text': 'A new Diary Entry'})
+		#request = HttpRequest()
+		#request.method = 'POST'
+		#request.POST['item_text'] = 'A new Diary Entry'
+
+		#response = StartPage(request)
+
+		#self.assertEqual(response.status_code, 302)
+		#self.assertEqual(response['location'], '/EList/the-only-list-in-the-world/')
+		self.assertRedirects(response, '/EList/the-only-list-in-the-world/')
 
 class ItemModelTest(TestCase):
 

@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$', views.StartPage, name = 'startpage'),
     #url(r'^$', views.ListPage, name = 'listpage'),
     url(r'^EList/the-only-list-in-the-world/$', views.view_list, name='view_list'),
+    url(r'^EList/new$', views.new_list, name='new_list'),
 ]

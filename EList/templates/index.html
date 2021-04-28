@@ -16,7 +16,7 @@
 	
 	<input type="text" id="currentDate" placeholder="Date today">	
 	
-	<form method="POST">
+	<form method="POST" action="/EList/new">
 		<input id="saveinput" name="item_text" placeholder="What happened today.." />
 		{% csrf_token %}
 	</form>
