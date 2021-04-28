@@ -3,6 +3,7 @@ from django.test import TestCase
 from EList.views import StartPage
 from EList.views import ListPage
 from django.http import HttpRequest
+from django.http import HttpResponse
 from django.template.loader import render_to_string
 from EList.models import Item
 # Create your tests here.
@@ -20,31 +21,59 @@ class HomePageTest(TestCase):
 		#self.assertTrue(html.startswith('<html>'))
 		#self.assertTrue(html.endswith('</html>'))
 
-
 	def test_start_page_returns_correct_view(self):
 		request = HttpRequest()
 		response = StartPage(request)
-		html = response.content.decode('utf8')
 		expected_html = render_to_string('index.html')
-		#self.assertEqual(response.content.decode(), expected_html)
+		return HttpResponse(expected_html)
+		self.assertEqual(response.content.decode(), expected_html)
+		
 
 	def test_start_page_can_save_a_POST_request(self):
 
 		request = HttpRequest()
-		
 		request.method = 'POST'
-		
-		request.POST['item_text'] = 'A new list item'
+		request.POST['item_text'] = 'A new Diary Entry'
 
 		response = StartPage(request)
-		html = response.content.decode('utf8')
+
+		self.assertEqual(Item.objects.count(), 1)
+		new_item = Item.objects.first()
+		self.assertEqual(new_item.text, 'A new Diary Entry')
+
+	def test_start_page_redirects_after_POST(self):
+
+		request = HttpRequest()
+		request.method = 'POST'
+		request.POST['item_text'] = 'A new Diary Entry'
+
+		response = StartPage(request)
+
+		self.assertEqual(response.status_code, 302)
+		self.assertEqual(response['location'], '/')
+
+	def test_start_page_only_saves_items_when_necessary(self):
+		request = HttpRequest()
+		StartPage(request)
+		self. assertEqual(Item.objects.count(), 0)
+
+	def  test_start_page_displays_all_list_items(self):
+
+		Item.objects.create(text='itemey 1')
+		Item.objects.create(text='itemey 2')
+
+		request = HttpRequest()
+		response = StartPage(request)
+
+		self.assertIn('itemey 1', response.content.decode())
+		self.assertIn('itemey 2', response.content.decode())
 
 	def manually_render_a_template():
 
 		self.assertIn('A new list item', response.content.decode())
 		expected_html = render_to_string(
 			'index.html',
-			{'new_item_text':  'A new list item'}
+			{'new_item_text':  'A new Diary Entry'}
 			)
 		self.assertEqual(response.content.decode(), expected_html)
 

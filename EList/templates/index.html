@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Cloud Diary</title>
@@ -21,7 +22,10 @@
 	</form>
 
 	<table id="diarylist">
-		<tr><td>1: {{ new_item_text }}</td></tr>
+		{% for item in items %}
+		<tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+		{% endfor %}
+		
 	</table>
 	
 	<!--<input type="submit" onclick="savediary()" value="Save"></input>-->
