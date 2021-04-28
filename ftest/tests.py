@@ -51,6 +51,9 @@ class PageTest(LiveServerTestCase):
 		self.assertEqual(inputbox.get_attribute('placeholder'), 'What happened today..')
 		inputbox.send_keys('Diary Entry')
 		inputbox.send_keys(Keys.ENTER)
+		eljohn_list_url = self.browser.current_url
+		self.assertRegex(eljohn_list_url, '/EList/.+')
+		self.check_for_row_in_list_table('1: Diary Entry')
 		time.sleep(3)
 
 		inputbox = self.browser.find_element_by_id('saveinput')
@@ -60,14 +63,36 @@ class PageTest(LiveServerTestCase):
 
 		#self.fail('Finish the Test!')
 
+		self.check_for_row_in_list_table('2: DateToday')
+		self.check_for_row_in_list_table('1: Diary Entry')
+
+		self.browser.quit()
+		self.browser = webdriver.Firefox()
+
+		self.browser.get(self.live_server_url)
+		page_text = self.browser.find_element_by_tag_name('body').text
+		self.assertNotIn('Diary Entry', page_text)
+		self.assertNotIn('DateToday', page_text)
+
+		inputbox = self.browser.find_element_by_id('saveinput')
+		inputbox.send_keys('New Diary')
+		inputbox.send_keys(Keys.ENTER)
+
+		newuser_list_url = self.browser.current_url
+		self.assertRegex(newuser_list_url, 'EList/.+')
+		self.assertNotEqual(newuser_list_url, eljohn_list_url)
+
+		page_text = self.browser.find_element_by_tag_name('body').text
+		self.assertNotIn('Diary Entry', page_text)
+		self.assertIn('New Diary', page_text)
 		#script = self.browser.find_element_by_id('scriptdate')
 		#self.assertEqual(script.get_attribute('placeholder'), 'DateToday')
 		
-		table = self.browser.find_element_by_id('diarylist')
-		rows = table.find_elements_by_tag_name('tr')
-		self.assertIn('1: Diary Entry', [row.text for row in rows]),
-		"New to-do item did not appear in table -- its text was:\n%s" % (table.text,)
-		self.assertIn('2: DateToday' ,[row.text for row in rows])
+		#table = self.browser.find_element_by_id('diarylist')
+		#rows = table.find_elements_by_tag_name('tr')
+		#self.assertIn('1: Diary Entry', [row.text for row in rows]),
+		#"New to-do item did not appear in table -- its text was:\n%s" % (table.text,)
+		#self.assertIn('2: DateToday' ,[row.text for row in rows])
 		#self.fail('Finish the test')
 
 
