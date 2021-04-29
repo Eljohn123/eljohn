@@ -7,20 +7,18 @@
 	</head>
 <body style="background-color: #62BCE0 ">
 
-	<h1 style="color: #495556;text-shadow:-5px -1px 6px;font-size: 100px">Cloud Diary</h1>
-
+	<h1 style="color: #495556;text-shadow:-5px -1px 6px;font-size: 100px">Cloud Diary</h1>	
 	
-	<h4>Date</h4>	
 	<h3 style="margin: 4px;">Diary</h3>
-
-	
-	<input type="text" id="currentDate" placeholder="Date today">	
-	
+	<input type="text" id="currentDate" placeholder="Date Today">
+	<input type="text" id="mood" placeholder="Your mood?">
+	<input type="text" id="achieve" placeholder="Achievements Today">
+	<input type="text" id="entry" placeholder="Your Entry">
 	<form method="POST" action="/EList/{{ list.id }}/add_item">
-		<input id="saveinput" name="item_text" placeholder="What happened today.." />
+		<input id="saveinput" name="item_text" placeholder="Diary Name" />
 		{% csrf_token %}
 	</form>
-
+	
 	<table id="diarylist">
 		{% for item in list.item_set.all %}
 		<tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
@@ -30,12 +28,12 @@
 	
 	<!--<input type="submit" onclick="savediary()" value="Save"></input>-->
 
-<script id="scriptdate" placeholder='DateToday'>
+<!--script id="scriptdate" placeholder='DateToday'>
 		var today = new Date();
 		var date = today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear();
 		var correct = today.date;
 
   			document.getElementById("currentDate").value = date;
-</script>
+</script-->
 </body>
 </html>
