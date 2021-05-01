@@ -124,6 +124,8 @@ class PageTest(LiveServerTestCase):
 		self.check_for_row_in_list_table('2: Diary Entry 2')
 		self.check_for_row_in_list_table('1: Diary Entry')
 
+		self.browser.quit()
+		self.browser = webdriver.Firefox()
 		self.browser.get(self.live_server_url)
 		page_text = self.browser.find_element_by_tag_name('body').text
 		self.assertNotIn('Diary Entry', page_text)

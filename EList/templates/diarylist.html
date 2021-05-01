@@ -10,17 +10,20 @@
 	<h1 style="color: #495556;text-shadow:-5px -1px 6px;font-size: 100px">Cloud Diary</h1>	
 	
 	<h3 style="margin: 4px;">Diary</h3>
-	<input type="text" id="currentDate" placeholder="Date Today">
-	<input type="text" id="mood" placeholder="Your mood?">
-	<input type="text" id="achieve" placeholder="Achievements Today">
-	<input type="text" id="entry" placeholder="Your Entry">
-	<form method="POST" action="/EList/{{ list.id }}/add_item">
+	
+	
+	<form method="POST" action="/EList/{{ DiaId.id }}/add_item">
+		<input type="text" id="currentDate" placeholder="Date Today">
+		<input type="text" id="mood" placeholder="Your mood?">
+		<input type="text" id="achieve" placeholder="Achievements Today">
+		<input type="text" id="entry" placeholder="Your Entry">
 		<input id="saveinput" name="item_text" placeholder="Diary Name" />
+		<input type="submit" name="savebtn" value="Save Entry">
 		{% csrf_token %}
 	</form>
 	
 	<table id="diarylist">
-		{% for item in list.item_set.all %}
+		{% for item in DiaId.item_set.all %}
 		<tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
 		{% endfor %}
 		

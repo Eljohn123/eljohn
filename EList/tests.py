@@ -21,12 +21,12 @@ class HomePageTest(TestCase):
 		#self.assertTrue(html.startswith('<html>'))
 		#self.assertTrue(html.endswith('</html>'))
 
-	def test_start_page_returns_correct_view(self):
-		request = HttpRequest()
-		response = StartPage(request)
-		expected_html = render_to_string('index.html')
-		return HttpResponse(expected_html)
-		self.assertEqual(response.content.decode(), expected_html)
+	#def test_start_page_returns_correct_view(self):
+	#	request = HttpRequest()
+	#	response = StartPage(request)
+	#	expected_html = render_to_string('index.html')
+	#	return HttpResponse(expected_html)
+	#	self.assertEqual(response.content.decode(), expected_html)
 
 	#def test_start_page_only_saves_items_when_necessary(self):
 		#request = HttpRequest()
@@ -44,31 +44,29 @@ class HomePageTest(TestCase):
 		#self.assertIn('itemey 1', response.content.decode())
 		#self.assertIn('itemey 2', response.content.decode())
 
-	def manually_render_a_template():
+	#def manually_render_a_template():
 
-		self.assertIn('A new list item', response.content.decode())
-		expected_html = render_to_string(
-			'index.html',
-			{'new_item_text':  'A new Diary Entry'}
-			)
-		self.assertEqual(response.content.decode(), expected_html)
+	#	self.assertIn('A new list item', response.content.decode())
+	#	expected_html = render_to_string(
+	#		'index.html',
+	#		{'new_item_text':  'A new Diary Entry'}
+	#		)
+	#	self.assertEqual(response.content.decode(), expected_html)
 
 class NewListTest(TestCase):
 
 	def test_saving_POST_request(self):
-
 		self.client.post(
 			'/EList/new',
 			data={'item_text': 'A new Diary Entry'})
-		#request = HttpRequest()
+		self.assertEqual(Item.objects.count(), 1)
+		new_item = Item.objects.first()
+		self.assertEqual(new_item.text, 'A new Diary Entry')
+			#request = HttpRequest()
 		#request.method = 'POST'
 		#request.POST['item_text'] = 'A new Diary Entry'
 
 		#response = StartPage(request)
-
-		self.assertEqual(Item.objects.count(), 1)
-		new_item = Item.objects.first()
-		self.assertEqual(new_item.text, 'A new Diary Entry')
 
 	def test_redirects_after_POST(self):
 
@@ -94,12 +92,12 @@ class ListAndItemModelsTest(TestCase):
 
 		first_item = Item()
 		first_item.text = 'First diary entry'
-		first_item.list = list_
+		first_item.DiaId = list_
 		first_item.save()
 
 		second_item = Item()
 		second_item.text = 'Second entry'
-		second_item.list = list_
+		second_item.DiaId = list_
 		second_item.save()
 
 		saved_list = List.objects.first()
@@ -111,9 +109,9 @@ class ListAndItemModelsTest(TestCase):
 		first_saved_item = saved_items[0]
 		second_saved_item = saved_items[1]
 		self.assertEqual(first_saved_item.text, 'First diary entry')
-		self.assertEqual(first_saved_item.list, list_)
+		self.assertEqual(first_saved_item.DiaId, list_)
 		self.assertEqual(second_saved_item.text, 'Second entry')
-		self.assertEqual(second_saved_item.list, list_)
+		self.assertEqual(second_saved_item.DiaId, list_)
 
 class ListViewTest(TestCase):
 	def test_uses_list_template(self):
@@ -124,11 +122,11 @@ class ListViewTest(TestCase):
 
 	def test_displays_only_items_for_that_list(self):
 		correct_list = List.objects.create()
-		Item.objects.create(text='itemey 1', list=correct_list)
-		Item.objects.create(text='itemey 2', list=correct_list)
+		Item.objects.create(text='itemey 1', DiaId=correct_list)
+		Item.objects.create(text='itemey 2', DiaId=correct_list)
 		other_list_ = List.objects.create()
-		Item.objects.create(text='other list item 1', list=other_list_)
-		Item.objects.create(text='other list item 2', list=other_list_)
+		Item.objects.create(text='other list item 1', DiaId=other_list_)
+		Item.objects.create(text='other list item 2', DiaId=other_list_)
 
 		response = self.client.get('/EList/%d/' % (correct_list.id,))
 
@@ -142,7 +140,7 @@ class ListViewTest(TestCase):
 		other_list = List.objects.create()
 		correct_list = List.objects.create()
 		response = self.client.get('/EList/%d/' % (correct_list.id,))
-		self.assertEqual(response.context['list'], correct_list)
+		self.assertEqual(response.context['DiaId'], correct_list)
 #class DiaryListPage(TestCase):
 	
 	#def test_listpage_return_correct_view(self):
@@ -165,7 +163,7 @@ class NewItemTest(TestCase):
 		self.assertEqual(Item.objects.count(), 1)
 		new_item = Item.objects.first()
 		self.assertEqual(new_item.text, 'A new entry for existing list')
-		self.assertEqual(new_item.list, correct_list)
+		self.assertEqual(new_item.DiaId, correct_list)
 
 	def test_redirects_to_list_view(self):
 		other_list = List.objects.create()
