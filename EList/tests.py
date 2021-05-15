@@ -10,7 +10,7 @@ from EList.models import Item, List
 
 class HomePageTest(TestCase):
 
-	def test_root_url_resolves_to_startpage_view(self):
+	def test_same_url_starting_to_startpage_view(self):
 		found = resolve('/')
 		self.assertEqual(found.func, StartPage,)
 
@@ -55,7 +55,7 @@ class HomePageTest(TestCase):
 
 class NewListTest(TestCase):
 
-	def test_saving_POST_request(self):
+	def test_save_the_POST_request(self):
 		self.client.post(
 			'/EList/new',
 			data={'item_text': 'A new Diary Entry'})
@@ -68,7 +68,7 @@ class NewListTest(TestCase):
 
 		#response = StartPage(request)
 
-	def test_redirects_after_POST(self):
+	def test_redirecting_after_POST(self):
 
 		response = self.client.post(
 			'/EList/new',
@@ -100,18 +100,43 @@ class ListAndItemModelsTest(TestCase):
 		second_item.DiaId = list_
 		second_item.save()
 
+		third_item = Item()
+		third_item.text = 'Third entry'
+		third_item.DiaId = list_
+		third_item.save()
+
+		fourth_item = Item()
+		fourth_item.text = 'Fourth entry'
+		fourth_item.DiaId = list_
+		fourth_item.save()
+
+		fifth_item = Item()
+		fifth_item.text = 'Fifth entry'
+		fifth_item.DiaId = list_
+		fifth_item.save()
+
 		saved_list = List.objects.first()
 		self.assertEqual(saved_list, list_)
 
 		saved_items = Item.objects.all()
-		self.assertEqual(saved_items.count(), 2)
+		self.assertEqual(saved_items.count(), 5)
 
 		first_saved_item = saved_items[0]
 		second_saved_item = saved_items[1]
+		third_saved_item = saved_items[2]
+		fourth_saved_item = saved_items[3]
+		fifth_saved_item = saved_items[4]
+
 		self.assertEqual(first_saved_item.text, 'First diary entry')
 		self.assertEqual(first_saved_item.DiaId, list_)
 		self.assertEqual(second_saved_item.text, 'Second entry')
 		self.assertEqual(second_saved_item.DiaId, list_)
+		self.assertEqual(third_saved_item.text, 'Third entry')
+		self.assertEqual(third_saved_item.DiaId, list_)
+		self.assertEqual(fourth_saved_item.text, 'Fourth entry')
+		self.assertEqual(fourth_saved_item.DiaId, list_)
+		self.assertEqual(fifth_saved_item.text, 'Fifth entry')
+		self.assertEqual(fifth_saved_item.DiaId, list_)
 
 class ListViewTest(TestCase):
 	def test_uses_list_template(self):

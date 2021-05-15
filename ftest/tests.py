@@ -125,7 +125,8 @@ class PageTest(LiveServerTestCase):
 		self.check_for_row_in_list_table('1: Diary Entry')
 
 		self.browser.quit()
-		self.browser = webdriver.Firefox()
+		#self.browser = webdriver.Firefox()
+	def test_other_user(self):
 		self.browser.get(self.live_server_url)
 		page_text = self.browser.find_element_by_tag_name('body').text
 		self.assertNotIn('Diary Entry', page_text)
@@ -189,7 +190,6 @@ class PageTest(LiveServerTestCase):
 
 		newuser_list_url = self.browser.current_url
 		self.assertRegex(newuser_list_url, '/EList/.+')
-		self.assertNotEqual(newuser_list_url, eljohn_list_url)
 
 		page_text = self.browser.find_element_by_tag_name('body').text
 		self.assertNotIn('Diary Entry', page_text)

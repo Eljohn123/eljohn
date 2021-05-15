@@ -7,15 +7,20 @@
 	</head>
 <body style="background-color: #62BCE0 ">
 
-	<h1 style="color: #495556;text-shadow:-5px -1px 6px;font-size: 100px">Cloud Diary</h1>
+	<h1>Cloud Diary</h1>
 
-	<h3 style="margin: 4px;">Diary</h3>
+	<h3 style="margin: 4px;">Diary List</h3>
 
 	<form method="POST" action="/EList/new">
-		<input type="text" id="currentDate" placeholder="Date Today">
-		<input type="text" id="mood" placeholder="Your mood?">
-		<input type="text" id="achieve" placeholder="Achievements Today">
-		<input type="text" id="entry" placeholder="Your Entry">
+		<h4>Date</h4>
+		<input type="text" id="currentDate" placeholder="Date Today"> <br>
+		<h4>Mood</h4>
+		<input type="text" id="mood" placeholder="Your mood?"> <br>
+		<h4>Achievement Today</h4>
+		<input type="text" id="achieve" placeholder="Achievements Today"> <br>
+		<h4>Entry</h4>
+		<input type="text" id="entry" placeholder="Your Entry"> <br>
+		<h4>Diary Title</h4>
 		<input id="saveinput" name="item_text" placeholder="Diary Name" />
 		<input type="submit" id="savebtn" name="savebtn" value="Save Entry">
 		{% csrf_token %}
