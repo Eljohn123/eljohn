@@ -14,9 +14,9 @@
 	
 	<form method="POST" action="/EList/{{ DiaId.id }}/add_item">
 		<h4>Date</h4>
-		<input type="text" id="currentDate" placeholder="Date Today"> <br>
+		<input type="text" id="currentDate" name= "datenow" placeholder="Date Today"> <br>
 		<h4>Mood</h4>
-		<input type="text" id="mood" placeholder="Your mood?"> <br>
+		<input type="text" id="mood" name="mood" placeholder="Your mood?"> <br>
 		<h4>Achievement Today</h4>
 		<input type="text" id="achieve" placeholder="Achievements Today"> <br>
 		<h4>Entry</h4>
@@ -27,13 +27,17 @@
 		{% csrf_token %}
 	</form>
 	
+	
 	<table id="diarylist">
 		{% for item in DiaId.item_set.all %}
-		<tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+		<tr>
+			<td>{{ forloop.counter }}: {{ item.diary_name }}</td>
+			<td>{{ item.diary_date }}</td>
+			<td>{{ item.mood }}</td>
+		</tr>
 		{% endfor %}
 		
 	</table>
-	
 	<!--<input type="submit" onclick="savediary()" value="Save"></input>-->
 
 <!--script id="scriptdate" placeholder='DateToday'>

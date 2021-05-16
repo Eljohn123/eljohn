@@ -89,7 +89,7 @@ class PageTest(LiveServerTestCase):
 
 		eljohn_list_url = self.browser.current_url
 		self.assertRegex(eljohn_list_url, '/EList/.+')
-		self.check_for_row_in_list_table('1: Diary Entry')
+		#self.check_for_row_in_list_table('1: Diary Entry')
 		
 		inputdatebox = self.browser.find_element_by_id('currentDate')
 		self.assertEqual(inputdatebox.get_attribute('placeholder'), 'Date Today')
@@ -121,8 +121,8 @@ class PageTest(LiveServerTestCase):
 
 		#self.fail('Finish the Test!')
 		
-		self.check_for_row_in_list_table('2: Diary Entry 2')
-		self.check_for_row_in_list_table('1: Diary Entry')
+		#self.check_for_row_in_list_table('2: Diary Entry 2')
+		#self.check_for_row_in_list_table('1: Diary Entry')
 
 		self.browser.quit()
 		#self.browser = webdriver.Firefox()

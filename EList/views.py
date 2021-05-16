@@ -27,12 +27,20 @@ def view_list(request, DiaId):
 
 def new_list(request):
 	list_ = List.objects.create()
-	Item.objects.create(text=request.POST['item_text'], DiaId=list_)
+	Item.objects.create(
+		diary_name=request.POST['item_text'],
+		diary_date=request.POST['datenow'],
+		mood=request.POST['mood'],
+		DiaId=list_)
 	return redirect(f'/EList/%d/' % (list_.id,))
 
 def add_item(request, DiaId):
 	list_ = List.objects.get(id=DiaId)
-	Item.objects.create(text=request.POST['item_text'], DiaId=list_)
+	Item.objects.create(
+		diary_name=request.POST['item_text'],
+		diary_date=request.POST['datenow'],
+		mood=request.POST['mood'], 
+		DiaId=list_)
 	return redirect(f'/EList/%d/' % (list_.id,))
 
 	#pass
