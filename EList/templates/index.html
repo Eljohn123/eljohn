@@ -17,9 +17,9 @@
 		<h4>Mood</h4>
 		<input type="text" id="mood" name="mood" placeholder="Your mood?"> <br>
 		<h4>Achievement Today</h4>
-		<input type="text" id="achieve" placeholder="Achievements Today"> <br>
+		<input type="text" id="achieve" name="achi" placeholder="Achievements Today"> <br>
 		<h4>Entry</h4>
-		<input type="text" id="entry" placeholder="Your Entry"> <br>
+		<input type="text" id="entry" name="entry" placeholder="Your Entry"> <br>
 		<h4>Diary Title</h4>
 		<input id="saveinput" name="item_text" placeholder="Diary Name" />
 		<input type="submit" id="savebtn" name="savebtn" value="Save Entry">
@@ -35,12 +35,12 @@
 	
 	<!--<input type="submit" onclick="savediary()" value="Save"></input>-->
 
-<!--script id="scriptdate" placeholder='DateToday'>
+<script id="scriptdate" placeholder='DateToday'>
 		var today = new Date();
-		var date = today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear();
+		var date = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()  ;
 		var correct = today.date;
 
   			document.getElementById("currentDate").value = date;
-</script-->
+</script>
 </body>
 </html>

@@ -60,8 +60,10 @@ class NewListTest(TestCase):
 			'/EList/new',
 			data={
 			'item_text': 'A new Diary Entry',
-			'datenow': 'Date Today',
-			'mood': 'Mood Today'
+			'datenow': '2021-05-20',
+			'mood': 'Mood Today',
+			'achi': 'Achievement Today',
+			'entry': 'Entry Today'
 			})
 		self.assertEqual(Item.objects.count(), 1)
 		new_item = Item.objects.first()
@@ -78,8 +80,10 @@ class NewListTest(TestCase):
 			'/EList/new',
 			data={
 			'item_text': 'A new Diary Entry',
-			'datenow': 'Date Today',
-			'mood': 'Mood Today'
+			'datenow': '2021-05-20',
+			'mood': 'Mood Today',
+			'achi': 'Achievement Today',
+			'entry': 'Entry Today'
 			})
 		new_list = List.objects.first()
 		self.assertRedirects(response, '/EList/%d/' % (new_list.id,))
@@ -194,8 +198,10 @@ class NewItemTest(TestCase):
 			'/EList/%d/add_item' % (correct_list.id,),
 			data={
 			'item_text': 'A new entry for existing list',
-			'datenow': 'Date Today',
-			'mood': 'Mood Today'
+			'datenow': '2021-05-20',
+			'mood': 'Mood Today',
+			'achi': 'Achievement Today',
+			'entry': 'Entry Today'
 			})
 		self.assertEqual(Item.objects.count(), 1)
 		new_item = Item.objects.first()
@@ -212,7 +218,9 @@ class NewItemTest(TestCase):
 			'/EList/%d/add_item' % (correct_list.id,),
 			data={
 			'item_text': 'A new entry for an list',
-			'datenow': 'Date Today',
-			'mood': 'Mood Today'}
-			)
+			'datenow': '2021-05-20',
+			'mood': 'Mood Today',
+			'achi': 'Achievement Today',
+			'entry': 'Entry Today'
+			})
 		self.assertRedirects(response, '/EList/%d/' % (correct_list.id,))

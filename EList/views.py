@@ -31,6 +31,8 @@ def new_list(request):
 		diary_name=request.POST['item_text'],
 		diary_date=request.POST['datenow'],
 		mood=request.POST['mood'],
+		achi=request.POST['achi'],
+		entry=request.POST['entry'],
 		DiaId=list_)
 	return redirect(f'/EList/%d/' % (list_.id,))
 
@@ -39,10 +41,11 @@ def add_item(request, DiaId):
 	Item.objects.create(
 		diary_name=request.POST['item_text'],
 		diary_date=request.POST['datenow'],
-		mood=request.POST['mood'], 
+		mood=request.POST['mood'],
+		achi=request.POST['achi'],
+		entry=request.POST['entry'],
 		DiaId=list_)
 	return redirect(f'/EList/%d/' % (list_.id,))
-
 	#pass
 #def ListPage(request):
 	#return render(request, 'diarylist.html')
