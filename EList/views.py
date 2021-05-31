@@ -1,6 +1,6 @@
 from django.shortcuts import redirect,render
 from django.http import HttpResponse
-from EList.models import Item, List
+from EList.models import Item, List, SignUp, Login, Favorite, Archive
 # Create your views here.
 def StartPage(request):
 	return render(request, 'index.html')

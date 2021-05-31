@@ -60,7 +60,7 @@ class PageTest(LiveServerTestCase):
 
 		inputdatebox = self.browser.find_element_by_id('currentDate')
 		self.assertEqual(inputdatebox.get_attribute('placeholder'), 'Date Today')
-		inputdatebox.send_keys('4/30/2021')
+		inputdatebox.send_keys('2021-05-20')
 		time.sleep(1)
 
 
@@ -93,7 +93,7 @@ class PageTest(LiveServerTestCase):
 		
 		inputdatebox = self.browser.find_element_by_id('currentDate')
 		self.assertEqual(inputdatebox.get_attribute('placeholder'), 'Date Today')
-		inputdatebox.send_keys('5/5/2021')
+		inputdatebox.send_keys('2021-05-20')
 		time.sleep(1)
 
 		mood = self.browser.find_element_by_id('mood')
@@ -134,7 +134,7 @@ class PageTest(LiveServerTestCase):
 
 		inputdatebox = self.browser.find_element_by_id('currentDate')
 		self.assertEqual(inputdatebox.get_attribute('placeholder'), 'Date Today')
-		inputdatebox.send_keys('5/10/2021')
+		inputdatebox.send_keys('2021-05-20')
 		time.sleep(1)
 
 		mood = self.browser.find_element_by_id('mood')
@@ -161,7 +161,7 @@ class PageTest(LiveServerTestCase):
 		
 		inputdatebox = self.browser.find_element_by_id('currentDate')
 		self.assertEqual(inputdatebox.get_attribute('placeholder'), 'Date Today')
-		inputdatebox.send_keys('5/12/2021')
+		inputdatebox.send_keys('2021-05-20')
 		time.sleep(1)
 
 

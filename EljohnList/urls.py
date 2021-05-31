@@ -19,7 +19,7 @@ from django.conf.urls import include, url
 from EList import views
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    url('admin/', admin.site.urls),
     url(r'^$', views.StartPage, name = 'startpage'),
     #url(r'^EList/(\d+)/$', views.view_list, name='view_list'),
     #url(r'^EList/(\d+)/add_item$', views.add_item, name='view_list'),
