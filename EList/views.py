@@ -4,6 +4,16 @@ from EList.models import Item, List, SignUp, Login, Favorite, Archive
 # Create your views here.
 def StartPage(request):
 	return render(request, 'index.html')
+def HomePage(request):
+	return render(request, 'home.html')
+def LoginPage(request):
+	return render(request, 'login.html')
+def SignUpPage(request):
+	return render(request, 'SignUp.html')
+def DiaryItemList(request):
+	return render(request, 'diaryitemlist.html')
+def Archive(request):
+	return render(request, 'archive.html')
 	#item = Item()
 	#item.text = request.POST.get('item_text', '')
 	#item.save()

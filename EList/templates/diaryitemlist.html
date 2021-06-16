@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Cloud Diary Items</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body style="background-color: #62BCE0">
+		<h1>Cloud Diary Items</h1>
+
+		<a href="home.html"><h3>Back to Home</h3></a>
+
+Diary Name: <input type="text" id="myText" value="My Diary">
+
+<button onclick="renamer()">Add Item</button>
+<button onclick="diaryy()"> Save </button>
+
+<div style="display: flex">
+	<a href="/">
+		<p id="pendings"></p>
+	</a>
+</div>
+
+<script>
+function renamer() {
+  var x = document.getElementById("myText").value;
+  document.getElementById("pendings").innerHTML = x;
+}
+</script>
+
+<script>
+function diaryy() {
+  var elmnt = document.getElementsByTagName("DIV")[0];
+  var cln = elmnt.cloneNode(true);
+  document.body.appendChild(cln);
+}
+</script>
+</body>

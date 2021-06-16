@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>	
 <html>
 	<head>
 		<title>Cloud Diary</title>
@@ -8,6 +8,7 @@
 <body style="background-color: #62BCE0 ">
 
 	<h1 >Cloud Diary Save List</h1>	
+	<a href="/"><h3>Back to Home</h3></a>
 	
 	<h3 style="margin: 4px;">Diary List</h3>
 	
@@ -26,11 +27,12 @@
 		<input type="submit" name="savebtn" value="Save Entry"> <br>
 		{% csrf_token %}
 	</form>
-	
+	<th>Diary</th>	
 	
 	<table id="diarylist">
+
 		{% for item in DiaId.item_set.all %}
-		<tr>
+		<tr> 
 			<td style="border: solid 2px;min-width: 150px">{{ forloop.counter }}: {{ item.diary_name }}</td>
 			<td style="border: solid 2px;min-width: 150px">{{ item.diary_date }}</td>
 			<td style="border: solid 2px;width: 150px">{{ item.mood }}</td>
