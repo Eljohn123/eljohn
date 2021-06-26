@@ -21,7 +21,19 @@ from EList import views
 urlpatterns = [
     #path('admin/', admin.site.urls),
     #url(r'^$', views.StartPage, name = 'startpage'),
-    url(r'^(\d+)/$', views.view_list, name='view_list'),
-    url(r'^(\d+)/add_item$', views.add_item, name='view_list'),
-    url(r'^new$', views.new_list, name='new_list'),
+    #url(r'^(\d+)/$', views.view_list, name='view_list'),
+    #url(r'^(\d+)/add_item$', views.add_item, name='view_list'),
+    #url(r'^new$', views.new_list, name='new_list'),
+
+    path('index',views.index, name='index'),
+    url(r'^create$', views.create, name='create'),
+    url(r'^edit/(?P<id>\d+)$', views.edit, name='edit'),
+    url(r'^edit/update/(?P<id>\d+)$', views.update, name='update'),
+    url(r'^delete/(?P<id>\d+)$', views.delete, name='delete'),
+
+    path('', views.HomePage, name = 'homepage'),
+    path('LoginPage', views.LoginPage, name = 'loginpage'),
+    path('SignUpPage', views.SignUpPage, name = 'signuppage'),
+    path('DiaryItemList', views.DiaryItemList, name = 'diaryitemlist'),
+    path('Archive', views.Archive, name = 'archive'),
 ]
