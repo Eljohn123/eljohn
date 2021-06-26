@@ -19,14 +19,9 @@ from django.conf.urls import include, url
 from EList import views
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    url(r'^$', views.StartPage, name = 'startpage'),
-    url(r'^home', views.HomePage, name = 'homepage'),
-    url(r'^login', views.LoginPage, name = 'loginpage'),
-    url(r'^SignUp', views.SignUpPage, name = 'signuppage'),
-    url(r'^diaryitemlist', views.DiaryItemList, name = 'diaryitemlist'),
-    url(r'^archive', views.Archive, name = 'archive'),
+    path('admin/', admin.site.urls),
     #url(r'^EList/(\d+)/$', views.view_list, name='view_list'),
     #url(r'^EList/(\d+)/add_item$', views.add_item, name='view_list'),
-    url(r'^EList/', include('EList.urls')),
+    path('', include('EList.urls')),
+    url(r'/', include('EList.urls')),
 ]
