@@ -1,0 +1,39 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Diary Items</title>  
+</head>  
+<body>  
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr>  
+        <th>Diary Name</th>  
+        <th>Date</th>  
+        <th>Mood</th>  
+        <th>Achievement</th>
+        <th>Entry</th>   
+        <th>Actions</th>  
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for EList in list1_ %}  
+    <tr>  
+        <td>{{ EList.diary_name }}</td>  
+        <td>{{ EList.diary_date }}</td>  
+        <td>{{ EList.mood }}</td>  
+        <td>{{ EList.achi }}</td>
+        <td>{{ EList.entry }}</td>    
+        <td>  
+            <a href="/edit/{{ EList.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
+            <a href="/delete/{{ EList.id }}">Delete</a>  
+        </td>  
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+<br>  
+<br>  
+<center><a href="/dia" class="btn btn-primary">Add More</a></center>  
+</body>  
+</html>  

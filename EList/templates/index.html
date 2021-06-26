@@ -1,48 +1,44 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Cloud Diary</title>
-
-
-	</head>
-<body style="background-color: #62BCE0 ">
-
-	<h1>Cloud Diary</h1>
-
-	<h3 style="margin: 4px;">Diary List</h3>
-	<a href="home.html"><h3>Back to Home</h3></a>
-	<a href="diaryitemlist.html"><h3>Back to Diary Items</h3></a>
-
-	<form method="POST" action="/EList/new">
-		<h4>Date</h4>
-		<input type="date" id="currentDate" name="datenow" placeholder="Date Today"> <br>
-		<h4>Mood</h4>
-		<input type="text" id="mood" name="mood" placeholder="Your mood?"> <br>
-		<h4>Achievement Today</h4>
-		<input type="text" id="achieve" name="achi" placeholder="Achievements Today"> <br>
-		<h4>Entry</h4>
-		<input type="text" id="entry" name="entry" placeholder="Your Entry"> <br>
-		<h4>Diary Title</h4>
+{% extends 'base.html' %}
+{% block body %}
+<form class="form-inline"  action="create" method="POST">
+    {% csrf_token %}
+    <div class="form-group" style="display:inline;">
+       <h4>Diary Title</h4>
 		<input id="saveinput" name="item_text" placeholder="Diary Name" />
-		<input type="submit" id="savebtn" name="savebtn" value="Save Entry">
-		{% csrf_token %}
-	</form>
+		<h4>Date</h4>
+		<input type="date" id="currentDate" name="datenow" placeholder="Date Today">
+		<h4>Mood</h4>
+		<input type="text" id="mood" name="mood" placeholder="Your mood?">
+		<h4>Achievement Today</h4>
+		<input type="text" id="achieve" name="achi" placeholder="Achievements Today">
+		<h4>Entry</h4>
+		<textarea type="text" id="entry" name="entry" placeholder="Your Entry" style="height: 200px; width: 100%;"></textarea><br>
+        <button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus"></span> ADD</button>
+    </div>
+</form>
+<br />
+<table class="table table-bordered" style="border: 2px solid black;">
+    <thead class="alert-warning">
+        <tr>
+            <th style="border: 2px solid black;padding: 5px;">Diary Name</th>
+            <th style="border: 2px solid black;padding: 5px;">Date</th>
+            <th style="border: 2px solid black;padding: 5px;">Mood</th>
+            <th style="border: 2px solid black;padding: 5px;">Achievement</th>
+            <th style="border: 2px solid black; width: 100%;padding: 5px;">Entry</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for diary in diaries %}
+        <tr>
+            <td style="border: 1px solid black;">{{ diary.diary_name }}</td>
+            <td style="border: 1px solid black;">{{ diary.diary_date }}</td>
+            <td style="border: 1px solid black;">{{ diary.mood }}</td>
+            <td style="border: 1px solid black;">{{ diary.achi }}</td>
+            <td style="border: 1px solid black;">{{ diary.entry}}</td>
+            <td><center><a class="btn btn-sm btn-warning" href="edit/{{ diary.id }}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a class="btn btn-sm btn-danger" href="delete/{{ diary.id }}"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td>
 
-	<!--table id="diarylist">
-		{% for item in items %}
-		<tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
-		{% endfor %}
-		
-	</table-->
-	
-	<!--<input type="submit" onclick="savediary()" value="Save"></input>-->
-
-<!--script id="scriptdate" placeholder='DateToday'>
-		var today = new Date();
-		var date = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate()  ;
-		var correct = today.date;
-
-  			document.getElementById("currentDate").value = date;
-</script-->
-</body>
-</html>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

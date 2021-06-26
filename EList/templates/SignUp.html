@@ -5,9 +5,12 @@
 	</head>
 	<body style="background-color: #62BCE0">
 		<h1>Cloud Diary SignUp</h1>
-		<a href="home.html"><h3>Back to Home</h3></a>
+		<a href="/"><h3>Back to Home</h3></a>
 	<form>
-		<label>Email</label> <br>
+		<label>Phone Number</label><br>
+		<input type="text" name="phone_number">
+		<br>
+		<label>Email</label><br>
 		<input type="text" name="email">
 		<br>
 		<label>Username</label><br>
@@ -15,9 +18,22 @@
 		<br>
 		<label>Password</label><br>
 		<input type="password" name="password">
-		<button>
-		<a href="home.html">Sign Up</a>
+		<button onclick="loginpop()">
+		<a id="link" href="LoginPage">Sign Up</a>
 		</button>
+		{% csrf_token %}
 	</form>		
-
+<script>
+function loginpop() {
+  var txt;
+  var r = confirm("Are you sure this is correct!?");
+  if (r == true) {
+    txt = "You pressed OK!";
+  } 
+  else {
+    document.getElementById("link").setAttribute('href','LoginPage');	
+  }
+  
+}
+</script>
 	</body>

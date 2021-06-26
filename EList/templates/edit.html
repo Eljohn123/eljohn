@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block body %}
+    <form method="POST" action="update/{{ diaries.id }}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="firstname">Diary Name</label>
+            <input type="text" name="item_text" value="{{ diaries.diary_name }}" class="form-control" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="firstname">Date</label>
+            <input type="date" name="datenow" value="{{ diaries.diary_name }}" class="form-control" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="lastname">Mood</label>
+            <input type="text" name="mood" value="{{ diaries.mood }}" class="form-control" required="required"/>
+        </div>
+         <div class="form-group">
+            <label for="lastname">Achievement</label>
+            <input type="text" name="achi" value="{{ diaries.achi }}" class="form-control" required="required"/>
+        </div>
+         <div class="form-group">
+            <label for="lastname">Entry</label>
+            <textarea style="height: 200px; width: 100%;" type="text" name="entry" value="{{ diaries.entry }}" class="form-control" required="required"></textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-edit"></span> Update</button>
+        </div>
+    </form>
+{% endblock %}

@@ -7,7 +7,7 @@
 	<body style="background-color: #62BCE0">
 		<h1>Cloud Diary Items</h1>
 
-		<a href="home.html"><h3>Back to Home</h3></a>
+		<a href="/"><h3>Back to Home</h3></a>
 
 Diary Name: <input type="text" id="myText" value="My Diary">
 
@@ -15,10 +15,14 @@ Diary Name: <input type="text" id="myText" value="My Diary">
 <button onclick="diaryy()"> Save </button>
 
 <div style="display: flex">
-	<a href="/">
+	<a href="index">
 		<p id="pendings"></p>
 	</a>
 </div>
+
+{% for item in DiaId.item_set.all %}
+	<p>{{ item.diary_name }}</p>
+	{% endfor %}
 
 <script>
 function renamer() {
